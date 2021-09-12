@@ -10,10 +10,16 @@ import TableRow from "./TableRow";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
+
+ const [reservations, setReservations] = useState([]);
+ const [reservationsError, setReservationsError] = useState(null);
+
+ const [tables, setTables] = useState([]);
+ const [tablesError, setTablesError] = useState(null);
+
 function Dashboard({ date }) {
   const history = useHistory();
-  const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
+  
 
   useEffect(loadDashboard, [date]);
 
@@ -46,68 +52,46 @@ function Dashboard({ date }) {
   return (
     <main>
       <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
         {/* reservations table */}
         <h4 className="mb-0">Reservations for {date}</h4>
         <ErrorAlert error={reservationsError} />
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Reservation ID:</th>
-              <th scope="col">First Name:</th>
-              <th scope="col">Last Name:</th>
-              <th scope="col">Mobile Number:</th>
-              <th scope="col">Reservation Time:</th>
-              <th scope="col">People:</th>
-              <th scope="col">Status</th>
-              <th scope="col">Seat Table</th>
-            </tr>
-          </thead>
-        </table>
+        <table class="table">
+			<thead>
+				<tr>
+					// "th" is a table heading. they all have a scope="col", which is used primarily for Bootstrap. (it will basically <strong> it)
+					<th scope="col">Reservation ID</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Mobile Number</th>
+					<th scope="col">Time</th>
+					<th scope="col">People</th>
+					<th scope="col">Status</th>
+					<th scope="col">Seat Table</th>
+				</tr>
+			</thead>
+			
+			<tbody>{tablesByParty()}</tbody>
+		</table>
 
-        <tbody>{reservationsByParty()}</tbody>
 
         {/* tables table */}
         <h4 className="mb-0">Tables</h4>
-        <table className="table">
+        <table class="table">
           <thead>
             <tr>
-              <th scope="col">Table ID:</th>
-              <th scope="col">Table Name:</th>
-              <th scope="col">Capacity:</th>
-              <th scope="col">Status:</th>
+              <th scope="col">ID</th>
+              <th scope="col">Table Name</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
+          <tbody>{tablesByParty()}</tbody>
         </table>
 
-        <tbody>{tablesByParty()}</tbody>
-
-        {/* previous button */}
-        <button
-          type="button"
-          onClick={() => history.push(`/dashboard?date=${previous(date)}`)}
-        >
-          Previous
-        </button>
-
-        {/* today button */}
-        <button
-          type="button"
-          onClick={() => history.push(`/dashboard?date=${today()}`)}
-        >
-          Today
-        </button>
-
-        {/* next button */}
-        <button
-          type="button"
-          onClick={() => history.push(`/dashboard?date=${next(date)}`)}
-        >
-          Next
-        </button>
+    <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
+		<button type="button" onClick={() => history.push(`/dashboard`)}>Today</button>
+		<button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
       </div>
-      {/* empty array because no reservations yet */}
-      {JSON.stringify(reservations)}
     </main>
   );
 }

@@ -31,9 +31,11 @@ export default function NewTable() {
     let foundError = null;
 
     if (formData.table_name === "" || formData.capacity === "") {
-      foundError = { message: "Please fill out all fields." };
+      foundError = { message: "Invalid Form: Must fill out all fields." };
     } else if (formData.table_name.length < 2) {
-      foundError = { message: "Table name must be at least 2 characters." };
+      foundError = {
+        message: "Invalid Table Name: Name must be at least 2 characters.",
+      };
     }
 
     setError(foundError);
