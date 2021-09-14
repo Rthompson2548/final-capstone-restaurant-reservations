@@ -91,7 +91,6 @@ function Dashboard({ date }) {
     <button type="button" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
 		<button type="button" onClick={() => history.push(`/dashboard`)}>Today</button>
 		<button type="button" onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
-      </div>
     </main>
   );
 }

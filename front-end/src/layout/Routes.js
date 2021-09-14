@@ -30,6 +30,9 @@ function Routes() {
         {/* will return reservation date if provided in new reservation, or thecurrent date otherwise */}
         <Dashboard date={date ? date : today()} />
       </Route>
+      <Route path="/search">
+        <Search />
+      </Route>
       <Route>
         <NotFound />
       </Route>
