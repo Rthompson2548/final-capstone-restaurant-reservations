@@ -8,7 +8,6 @@ export default function Search() {
   const [reservations, setReservations] = useState([])
 
   function handleChange({ target }) {
-    // sets new reservation data along with it's names and values
     setMobileNumber(target.value);
   }
 
@@ -28,9 +27,7 @@ function handleSubmit(event) {
 }
 
 const findReservations = () => {
-	// i use a ternary here. we would like to return something different if there are no reservations.
 	return reservations.length > 0 ?
-		// you will see that i used the same ReservationRow component that we used in the Dashboard. yay less work!
 		reservations.map((reservation) => 
 			<ReservationRow key={reservation.reservation_id} reservation={reservation} />) :
 		<p>No reservations found</p>;
