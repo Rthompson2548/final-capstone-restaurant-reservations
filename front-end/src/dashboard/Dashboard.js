@@ -52,29 +52,26 @@ function Dashboard({ date }) {
   return (
     <main>
       <h1>Dashboard</h1>
-        {/* reservations table */}
         <h4 className="mb-0">Reservations for {date}</h4>
         <ErrorAlert error={reservationsError} />
         <table class="table">
-			<thead>
-				<tr>
-					// "th" is a table heading. they all have a scope="col", which is used primarily for Bootstrap. (it will basically <strong> it)
-					<th scope="col">Reservation ID</th>
-					<th scope="col">First Name</th>
-					<th scope="col">Last Name</th>
-					<th scope="col">Mobile Number</th>
-					<th scope="col">Time</th>
-					<th scope="col">People</th>
-					<th scope="col">Status</th>
-					<th scope="col">Seat Table</th>
-				</tr>
-			</thead>
-			
-			<tbody>{tablesByParty()}</tbody>
-		</table>
+          <thead>
+            <tr>
+              <th scope="col">Reservation ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Mobile Number</th>
+              <th scope="col">Time</th>
+              <th scope="col">People</th>
+              <th scope="col">Status</th>
+              <th scope="col">Seat Table</th>
+            </tr>
+          </thead>
+          
+          <tbody>{tablesByParty()}</tbody>
+		    </table>
 
 
-        {/* tables table */}
         <h4 className="mb-0">Tables</h4>
         <table class="table">
           <thead>

@@ -4,15 +4,19 @@ import { useHistory } from "react-router";
 export default function TableRow({ table }) {
   if (!table) return null;
 
-  function handleFinish(event){
-    const history = useHistory()
-    if (window.confirm("Do you want to cancel this reservation? This cannot be undone.") {
-      // refreshes table rows to show updated statuses
-      history.push(`/dashboard`)
-    }
-  } 
+  function handleFinish() {
+    if (
+      window.confirm(
+        "Is this table ready to seat new guests? This cannot be undone."
+      )
+    ) {
+      const abortController = new AbortController();
 
-  
+      finishTable(table.table_id, abortController.signal).then(loadDashboard);
+
+      return () => abortController.abort();
+    }
+  }
 
   return (
     <tr>
@@ -23,14 +27,14 @@ export default function TableRow({ table }) {
       <td data-table-id-status={table.table_id}>{table.status}</td>
 
       <td data-table-id-finish={table.table_id}>
-        <button onClick={handleFinish} type="button">Finish</button>
+        <button onClick={handleFinish} type="button">
+          Finish
+        </button>
       </td>
 
       <td>
         <button type="button">Cancel</button>
       </td>
-
-
     </tr>
   );
 }
