@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
 import NewReservation from "../reservations/NewReservation";
+import Search from "../search/Search";
 
 /**
  * Defines all the routes for the application.

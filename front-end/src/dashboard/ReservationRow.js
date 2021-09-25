@@ -1,18 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { updateReservationStatus } from "../utils/api";
 
-export default function ReservationRow({ reservation }) {
+export default function ReservationRow({ reservation, loadDashboard }) {
   if (!reservation || reservation.status === "finished") return null;
 
-  function handleCancel(event) {
+  /**
+   * handles if the user wants to cancel a reservation
+   */
+  function handleCancel() {
     if (
       window.confirm(
         "Do you want to cancel this reservation? This cannot be undone."
       )
     ) {
-      // api call here later
+      const abortController = new AbortController();
 
-      // reloads current url like a refresh button
-      window.location.reload();
+      updateReservationStatus(
+        reservation.reservation_id,
+        "cancelled",
+        abortController.status
+      ).then(loadDashboard);
+
+      return () => abortController.abort();
     }
   }
 
@@ -22,32 +32,42 @@ export default function ReservationRow({ reservation }) {
       <td>{reservation.first_name}</td>
       <td>{reservation.last_name}</td>
       <td>{reservation.mobile_number}</td>
-      <td>{reservation.reservation_time}</td>
+      <td>{reservation.reservation_date.substr(0, 10)}</td>
+      <td>{reservation.reservation_time.substr(0, 5)}</td>
       <td>{reservation.people}</td>
       <td data-reservation-id-status={reservation.reservation_id}>
         {reservation.status}
       </td>
-      // us-08
-      <button
-        data-reservation-id-cancel={reservation.reservation_id}
-        type="button"
-        onClick={handleCancel()}
-      >
-        Cancel
-      </button>
-      ;
-      <td>
-        {/* navigates to "edit" page when clicked */}
-        <a href={`/reservations/${reservation_id}/edit`}>
-          <button type="button">Edit</button>
-        </a>
-      </td>
+
       {reservation.status === "booked" && (
-        <td>
-          <a href={`/reservations/${reservation.reservation_id}/seat`}>
-            <button type="button">Seat</button>
-          </a>
-        </td>
+        <>
+          <td>
+            <Link to={`/reservations/${reservation.reservation_id}/edit`}>
+              <button className="btn btn-secondary" type="button">
+                Edit
+              </button>
+            </Link>
+          </td>
+
+          <td>
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={handleCancel}
+              data-reservation-id-cancel={reservation.reservation_id}
+            >
+              Cancel
+            </button>
+          </td>
+
+          <td>
+            <a href={`/reservations/${reservation.reservation_id}/seat`}>
+              <button className="btn btn-primary" type="button">
+                Seat
+              </button>
+            </a>
+          </td>
+        </>
       )}
     </tr>
   );

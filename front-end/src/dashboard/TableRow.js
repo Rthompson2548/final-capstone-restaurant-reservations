@@ -1,9 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { finishTable } from "../utils/api";
 
-export default function TableRow({ table }) {
+export default function TableRow({ table, loadDashboard }) {
   if (!table) return null;
 
+  /**
+   * handles finishing a seated table 
+   */
   function handleFinish() {
     if (
       window.confirm(
@@ -18,23 +21,25 @@ export default function TableRow({ table }) {
     }
   }
 
-  return (
+  return ( 
     <tr>
       <th scope="row">{table.table_id}</th>
       <td>{table.table_name}</td>
       <td>{table.capacity}</td>
-
       <td data-table-id-status={table.table_id}>{table.status}</td>
+      <td>{table.reservation_id ? table.reservation_id : "--"}</td>
 
-      <td data-table-id-finish={table.table_id}>
-        <button onClick={handleFinish} type="button">
-          Finish
-        </button>
-      </td>
-
-      <td>
-        <button type="button">Cancel</button>
-      </td>
+      {table.status === "occupied" && (
+        <td>
+          <button
+            data-table-id-finish={table.table_id}
+            onClick={handleFinish}
+            type="button"
+          >
+            Finish
+          </button>
+        </td>
+      )}
     </tr>
   );
 }

@@ -6,7 +6,7 @@ export default function NewTable() {
   const history = useHistory();
 
   const [error, setError] = useState([]);
-  // sets initalize state of a table
+  // sets initial state of a table
   const [formData, setFormData] = useState({
     table_name: "",
     capacity: 1,

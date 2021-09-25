@@ -10,7 +10,7 @@ function App() {
   return (
     <Switch>
       <Route path="/">
-        <Layout /> 
+        <Layout />
       </Route>
     </Switch>
   );

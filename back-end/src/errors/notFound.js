@@ -1,7 +1,7 @@
 /**
  * Express API "Not found" handler.
  */
-function notFound(req, res, next) {
+function notFound(request, response, next) {
   next({ status: 404, message: `Path not found: ${req.originalUrl}` });
 }
 
