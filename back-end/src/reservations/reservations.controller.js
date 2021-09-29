@@ -1,11 +1,20 @@
-/** function for:
- *  checking for request body data X
- *  checking for all required fields (make var for these fields) X
- *  checking is date is in actual date format
- *  checking if the "people" field is a number
- *  checking if "people" is >= 1 */
+const service = require("./reservations.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+
+/** function from handling a /GET request to /reservations */
+async function list(request, response) {
+  /** create variable for date so that the request will
+   * only return all reservations for that specific date
+   */
+  const date = request.query.date; //> /reservations?date=yyyy-mm-dd
+  const response = await service.list(date);
+  response.json({
+    data: response,
+  });
+}
+
 function validateBody(request, response, next) {
-  if (!req.body.data) {
+  if (!request.body.data) {
     return next({ status: 400, message: "Body must include a data object" });
   }
 
@@ -19,7 +28,10 @@ function validateBody(request, response, next) {
   ];
 
   for (const field of requiredFields) {
-    if (!req.body.data.hasOwnProperty(field) || req.body.data[field] === "") {
+    if (
+      !request.body.data.hasOwnProperty(field) ||
+      request.body.data[field] === ""
+    ) {
       return next({ status: 400, message: `Field required: '${field}'` });
     }
   }
@@ -27,7 +39,7 @@ function validateBody(request, response, next) {
   if (
     Number.isNaN(
       Date.parse(
-        `${req.body.data.reservation_date} ${req.body.data.reservation_time}`
+        `${request.body.data.reservation_date} ${request.body.data.reservation_time}`
       )
     )
   ) {
@@ -38,28 +50,27 @@ function validateBody(request, response, next) {
     });
   }
 
-  if (typeof req.body.data.people !== "number") {
+  if (typeof request.body.data.people !== "number") {
     return next({ status: 400, message: "'people' field must be a number" });
   }
 
-  if (req.body.data.people < 1) {
+  if (request.body.data.people < 1) {
     return next({ status: 400, message: "'people' field must be at least 1" });
   }
 
   next();
 }
-
 /** middleware function for validating the reservation_date */
 function validateDate(request, response, next) {
   const reserveDate = new Date(
-    `${req.body.data.reservation_date}T${req.body.data.reservation_time}:00.000`
+    `${request.body.data.reservation_date}T${request.body.data.reservation_time}:00.000`
   );
   const todaysDate = new Date();
 
   if (reserveDate.getDay() === 2) {
     return next({
       status: 400,
-      message: "'reservation_date' field: restauraunt is closed on tuesday",
+      message: "'reservation_date' field: restaurant is closed on tuesday",
     });
   }
 
@@ -103,23 +114,6 @@ function validateDate(request, response, next) {
   }
 
   next();
-}
-
-/** GET /reservations
-      returns only reservations matching date query parameters
-      returns reservations sorted by time (early -> late)
- */
-
-/** function from handling a /GET request to /reservations */
-async function list(request, response) {
-  /** create variable for date so that the request will
-   * only return all reservations for that specific date
-   */
-  const date = request.query.date; //> /reservations?date=yyyy-mm-dd
-  const response = await service.list(date);
-  res.json({
-    data: response,
-  });
 }
 
 /**

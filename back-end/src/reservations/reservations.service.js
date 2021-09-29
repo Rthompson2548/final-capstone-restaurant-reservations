@@ -1,5 +1,5 @@
 const knex = require("../db/connection");
-const table = "reservations";
+const tableName = "reservations";
 
 /** inserts new reservation into reservations and returns all reservations */
 function create(reservation) {
@@ -14,3 +14,8 @@ function list(date) {
     return knex(table).select("*");
   }
 }
+
+module.exports = {
+  create,
+  list,
+};
