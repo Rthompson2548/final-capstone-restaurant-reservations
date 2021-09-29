@@ -11,7 +11,7 @@ export default function NewReservation({ loadDashboard, edit }) {
 	const [errors, setErrors] = useState([]);
 	const [formData, setFormData] = useState({
 		// initial (default) data
-		first_name: "",
+		first_name: "", 
 		last_name: "",
 		mobile_number: "",
 		reservation_date: "",
