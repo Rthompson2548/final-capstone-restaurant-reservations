@@ -76,6 +76,7 @@ export async function listReservations(params, signal) {
     .then(formatReservationTime);
 }
 
+
 /** posts a new reservation to the reservations page */
 export async function createReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
@@ -120,8 +121,8 @@ export async function seatTable(reservation_id, table_id, signal) {
 }
 
 /** removes a table for the seat page */
-export async function finishTable(url, table, signal) {
+export async function finishTable(table_id, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
-  const body = JSON.stringify({ data: table.table_id });
+
   return await fetchJson(url, { headers, signal, method: "DELETE" }, []);
 }

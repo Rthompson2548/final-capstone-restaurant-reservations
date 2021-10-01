@@ -11,9 +11,3 @@ exports.seed = function (knex) {
       ]);
     });
 };
-
-/**
- * return 400 for the following:
- * 
- * 
- */
