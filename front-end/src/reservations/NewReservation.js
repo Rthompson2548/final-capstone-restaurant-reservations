@@ -135,47 +135,47 @@ export default function NewReservation({ loadDashboard, edit }) {
    * Make sure the date and time of the reservation works with the restaurant's schedule.
    */
   function validateDate(foundErrors) {
-    const reserveDate = new Date(
+    const reservationDateTime = new Date(
       `${formData.reservation_date}T${formData.reservation_time}:00.000`
     );
     const todaysDate = new Date();
 
-    if (reserveDate.getDay() === 2) {
+    if (reservationDateTime.getDay() === 2) {
       foundErrors.push({
         message:
-          "Reservation cannot be made: Restaurant is closed on Tuesdays.",
+          "invalid date: restaurant is closed on tuesdays.",
       });
     }
 
-    if (reserveDate < todaysDate) {
+    if (reservationDateTime < todaysDate) {
       foundErrors.push({
-        message: "Reservation cannot be made: Date is in the past.",
+        message: "invalid date: only reservations for future dates can be made",
       });
     }
 
     if (
-      reserveDate.getHours() < 10 ||
-      (reserveDate.getHours() === 10 && reserveDate.getMinutes() < 30)
+      reservationDateTime.getHours() < 10 ||
+      (reservationDateTime.getHours() === 10 && reservationDateTime.getMinutes() < 30)
     ) {
       foundErrors.push({
         message:
-          "Reservation cannot be made: Restaurant is not open until 10:30AM.",
+          "invalid time: restaurant does not open until 10:30am",
       });
     } else if (
-      reserveDate.getHours() > 22 ||
-      (reserveDate.getHours() === 22 && reserveDate.getMinutes() >= 30)
+      reservationDateTime.getHours() > 22 ||
+      (reservationDateTime.getHours() === 22 && reservationDateTime.getMinutes() >= 30)
     ) {
       foundErrors.push({
         message:
-          "Reservation cannot be made: Restaurant is closed after 10:30PM.",
+          "invalid time: restaurant closes at 10:30pm",
       });
     } else if (
-      reserveDate.getHours() > 21 ||
-      (reserveDate.getHours() === 21 && reserveDate.getMinutes() > 30)
+      reservationDateTime.getHours() > 21 ||
+      (reservationDateTime.getHours() === 21 && reservationDateTime.getMinutes() > 30)
     ) {
       foundErrors.push({
         message:
-          "Reservation cannot be made: Reservation must be made at least an hour before closing (10:30PM).",
+          "invalid time: reservation must be made at least an hour before closing",
       });
     }
 

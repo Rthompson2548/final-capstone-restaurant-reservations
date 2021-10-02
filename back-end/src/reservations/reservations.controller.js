@@ -69,19 +69,19 @@ async function validateBody(req, res, next) {
 }
 /** middleware function for validating the reservation_date */
 async function validateDate(req, res, next) {
-  const reserveDate = new Date(
+  const reservationDateTime = new Date(
     `${req.body.data.reservation_date}T${req.body.data.reservation_time}:00.000`
   );
   const todaysDate = new Date();
 
-  if (reserveDate.getDay() === 2) {
+  if (reservationDateTime.getDay() === 2) {
     return next({
       status: 400,
       message: "invalid date: restaurant is closed on tuesdays",
     });
   }
 
-  if (reserveDate < todaysDate) {
+  if (reservationDateTime < todaysDate) {
     return next({
       status: 400,
       message: "invalid date: only reservations for future dates can be made",
@@ -89,34 +89,34 @@ async function validateDate(req, res, next) {
   }
 
   if (
-    reserveDate.getHours() < 10 ||
-    (reserveDate.getHours() === 10 && reserveDate.getMinutes() < 30)
+    reservationDateTime.getHours() < 10 ||
+    (reservationDateTime.getHours() === 10 && reservationDateTime.getMinutes() < 30)
   ) {
     return next({
       status: 400,
       message:
-        "invalid time: reservation time cannot be before restaurant opens",
+        "invalid time: restaurant does not open until 10:30am",
     });
   }
 
   if (
-    reserveDate.getHours() > 22 ||
-    (reserveDate.getHours() === 22 && reserveDate.getMinutes() >= 30)
+    reservationDateTime.getHours() > 22 ||
+    (reservationDateTime.getHours() === 22 && reservationDateTime.getMinutes() >= 30)
   ) {
     return next({
       status: 400,
-      message: "invalid time: reservation time cannot be after 10:30PM",
+      message: "invalid time: restaurant closes at 10:30pm",
     });
   }
 
   if (
-    reserveDate.getHours() > 21 ||
-    (reserveDate.getHours() === 21 && reserveDate.getMinutes() > 30)
+    reservationDateTime.getHours() > 21 ||
+    (reservationDateTime.getHours() === 21 && reservationDateTime.getMinutes() > 30)
   ) {
     return next({
       status: 400,
       message:
-        "invalid time: can only make reservation time at least one hour before restaurant closes",
+        "invalid time: reservation must be made at least an hour before closing",
     });
   }
 
