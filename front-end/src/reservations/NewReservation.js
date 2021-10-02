@@ -8,16 +8,14 @@ import {
 } from "../utils/api";
 
 export default function NewReservation({ loadDashboard, edit }) {
-  /** clicking the "submit" button will save the reservation,
-   * then displays the previous page */
   const history = useHistory();
   const { reservation_id } = useParams();
 
   const [reservationsError, setReservationsError] = useState(null);
   const [errors, setErrors] = useState([]);
   const [apiError, setApiError] = useState(null);
+
   const [formData, setFormData] = useState({
-    // initial (default) data
     first_name: "",
     last_name: "",
     mobile_number: "",
@@ -87,7 +85,10 @@ export default function NewReservation({ loadDashboard, edit }) {
   }
 
   /**
-   * makes an api call if a reservation was created or edited and submitted
+   * if a reservation was created or edited, clicking the "submit" button will do the following:
+   * make an api call
+   * save the reservation
+   * display the previous page
    */
   function handleSubmit(event) {
     event.preventDefault();
@@ -195,9 +196,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         First Name:&nbsp;
       </label>
       <input
-        className="form-control"
         name="first_name"
         id="first_name"
+        className="form-control"
         type="text"
         onChange={handleChange}
         value={formData.first_name}
@@ -208,9 +209,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Last Name:&nbsp;
       </label>
       <input
-        className="form-control"
         name="last_name"
         id="last_name"
+        className="form-control"
         type="text"
         onChange={handleChange}
         value={formData.last_name}
@@ -221,9 +222,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Mobile Number:&nbsp;
       </label>
       <input
-        className="form-control"
         name="mobile_number"
         id="mobile_number"
+        className="form-control"
         type="text"
         onChange={handleChange}
         value={formData.mobile_number}
@@ -234,9 +235,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Reservation Date:&nbsp;
       </label>
       <input
-        className="form-control"
         name="reservation_date"
         id="reservation_date"
+        className="form-control"
         type="date"
         onChange={handleChange}
         value={formData.reservation_date}
@@ -247,9 +248,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Reservation Time:&nbsp;
       </label>
       <input
-        className="form-control"
         name="reservation_time"
         id="reservation_time"
+        className="form-control"
         type="time"
         onChange={handleChange}
         value={formData.reservation_time}
@@ -260,9 +261,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Party Size:&nbsp;
       </label>
       <input
-        className="form-control"
         name="people"
         id="people"
+        className="form-control"
         type="number"
         min="1"
         onChange={handleChange}
