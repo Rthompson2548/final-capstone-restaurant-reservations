@@ -246,7 +246,7 @@ export default function NewReservation({ loadDashboard, edit }) {
       <label className="form-label" htmlFor="reservation_time">
         Reservation Time:&nbsp;
       </label>
-      <input
+      <input 
         name="reservation_time"
         id="reservation_time"
         className="form-control"

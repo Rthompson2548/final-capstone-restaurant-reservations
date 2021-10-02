@@ -77,7 +77,7 @@ async function validateDate(req, res, next) {
   if (reserveDate.getDay() === 2) {
     return next({
       status: 400,
-      message: "invalid date: cannot make reservation on a tuesday",
+      message: "invalid date: restaurant is closed on tuesdays",
     });
   }
 
@@ -135,7 +135,7 @@ async function create(req, res) {
   res.status(201).json({
     data: response[0],
   });
-}
+} 
 
 /** export list and create with their middleware functions
  * and asyncErrorBoundary included */

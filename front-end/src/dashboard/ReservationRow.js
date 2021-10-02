@@ -25,7 +25,7 @@ export default function ReservationRow({ reservation, loadDashboard }) {
 
       return () => abortController.abort();
     }
-  }
+  } 
 
   return (
     <tr>
