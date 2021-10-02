@@ -7,9 +7,9 @@ async function list(request, response) {
    * only return all reservations for that specific date
    */
   const date = request.query.date; //> /reservations?date=yyyy-mm-dd
-  const response = await service.list(date);
+  const res = await service.list(date);
   response.json({
-    data: response,
+    data: res,
   });
 }
 
