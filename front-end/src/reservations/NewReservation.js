@@ -191,7 +191,6 @@ export default function NewReservation({ loadDashboard, edit }) {
       {errorsJSX()}
       <ErrorAlert error={apiError} />
       <ErrorAlert error={reservationsError} />
-
       <label className="form-label" htmlFor="first_name">
         First Name:&nbsp;
       </label>
@@ -204,7 +203,6 @@ export default function NewReservation({ loadDashboard, edit }) {
         value={formData.first_name}
         required
       />
-
       <label className="form-label" htmlFor="last_name">
         Last Name:&nbsp;
       </label>
@@ -217,7 +215,6 @@ export default function NewReservation({ loadDashboard, edit }) {
         value={formData.last_name}
         required
       />
-
       <label className="form-label" htmlFor="mobile_number">
         Mobile Number:&nbsp;
       </label>
@@ -230,7 +227,8 @@ export default function NewReservation({ loadDashboard, edit }) {
         value={formData.mobile_number}
         required
       />
-
+      /** including `placeholder` and `pattern` attributes for `date` and `time`
+      to add support to non-chrome browsers */
       <label className="form-label" htmlFor="reservation_date">
         Reservation Date:&nbsp;
       </label>
@@ -239,11 +237,12 @@ export default function NewReservation({ loadDashboard, edit }) {
         id="reservation_date"
         className="form-control"
         type="date"
+        placeholder="YYYY-MM-DD"
+        pattern="\d{4}-\d{2}-\d{2}"
         onChange={handleChange}
         value={formData.reservation_date}
         required
       />
-
       <label className="form-label" htmlFor="reservation_time">
         Reservation Time:&nbsp;
       </label>
@@ -252,11 +251,12 @@ export default function NewReservation({ loadDashboard, edit }) {
         id="reservation_time"
         className="form-control"
         type="time"
+        placeholder="HH:MM"
+        pattern="[0-9]{2}:[0-9]{2}"
         onChange={handleChange}
         value={formData.reservation_time}
         required
       />
-
       <label className="form-label" htmlFor="people">
         Party Size:&nbsp;
       </label>
@@ -270,7 +270,6 @@ export default function NewReservation({ loadDashboard, edit }) {
         value={formData.people}
         required
       />
-
       <button
         className="btn btn-primary m-1"
         type="submit"

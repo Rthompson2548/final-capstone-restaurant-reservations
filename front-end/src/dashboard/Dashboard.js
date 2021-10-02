@@ -46,13 +46,15 @@ function Dashboard({
     }
   };
 
-  /**
-   * Allows the user to go forward/backward days on the calendar.
-   */
   function handleClick({ target }) {
     let newDate;
     let useDate;
 
+    /** uses:
+     * previous() to set the reservations' list date to be the previous day
+     * next() to set the reservations' list date to be the following day
+     * today() to set reservation's list date to current day
+     */
     if (!date) {
       useDate = today();
     } else {

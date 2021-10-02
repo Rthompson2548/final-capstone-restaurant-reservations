@@ -1,23 +1,17 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
-/** function from handling a /GET request to /reservations */
-async function list(request, response) {
-  /** create variable for date so that the request will
+/** function from handling a /GET req to /reservations */
+async function list(req, res) {
+  /** create variable for date so that the req will
    * only return all reservations for that specific date
    */
-  const date = request.query.date; //> /reservations?date=yyyy-mm-dd
-  const res = await service.list(date);
-  response.json({
-    data: res,
-  });
+  const date = req.query.date; //> /reservations?date=yyyy-mm-dd
+  const response = await service.list(date);
+  res.json({ data: response });
 }
 
-function validateBody(request, response, next) {
-  if (!request.body.data) {
-    return next({ status: 400, message: "Body must include a data object" });
-  }
-
+async function validateBody(req, res, next) {
   const requiredFields = [
     "first_name",
     "last_name",
@@ -28,57 +22,69 @@ function validateBody(request, response, next) {
   ];
 
   for (const field of requiredFields) {
-    if (
-      !request.body.data.hasOwnProperty(field) ||
-      request.body.data[field] === ""
-    ) {
-      return next({ status: 400, message: `Field required: '${field}'` });
+    if (!req.body.data.hasOwnProperty(field) || req.body.data[field] === "") {
+      return next({
+        status: 400,
+        message: `invalid reservation: ${field} is missing`,
+      });
     }
   }
 
   if (
     Number.isNaN(
       Date.parse(
-        `${request.body.data.reservation_date} ${request.body.data.reservation_time}`
+        `${req.body.data.reservation_date} ${req.body.data.reservation_time}`
       )
     )
   ) {
     return next({
       status: 400,
       message:
-        "'reservation_date' or 'reservation_time' field is in an incorrect format",
+        "invalid day and/or time: reservation date and/or time are not formatted correctly. please format time to 'HH:MM', and date to 'YYYY-MM-DD'",
     });
   }
 
-  if (typeof request.body.data.people !== "number") {
-    return next({ status: 400, message: "'people' field must be a number" });
+  if (typeof req.body.data.people !== "number") {
+    return next({
+      status: 400,
+      message: "error: reservation party size must be a number",
+    });
   }
 
-  if (request.body.data.people < 1) {
-    return next({ status: 400, message: "'people' field must be at least 1" });
+  if (req.body.data.people < 1) {
+    return next({
+      status: 400,
+      message: "error: reservation party must include at least 1 person",
+    });
+  }
+
+  if (req.body.data.status && req.body.data.status !== "booked") {
+    return next({
+      status: 400,
+      message: `invalid status: reservation status cannot be ${req.body.data.status}`,
+    });
   }
 
   next();
 }
 /** middleware function for validating the reservation_date */
-function validateDate(request, response, next) {
+async function validateDate(req, res, next) {
   const reserveDate = new Date(
-    `${request.body.data.reservation_date}T${request.body.data.reservation_time}:00.000`
+    `${req.body.data.reservation_date}T${req.body.data.reservation_time}:00.000`
   );
   const todaysDate = new Date();
 
   if (reserveDate.getDay() === 2) {
     return next({
       status: 400,
-      message: "'reservation_date' field: restaurant is closed on tuesday",
+      message: "invalid date: cannot make reservation on a tuesday",
     });
   }
 
   if (reserveDate < todaysDate) {
     return next({
       status: 400,
-      message:
-        "'reservation_date' and 'reservation_time' field must be in the future",
+      message: "invalid date: only reservations for future dates can be made",
     });
   }
 
@@ -88,7 +94,8 @@ function validateDate(request, response, next) {
   ) {
     return next({
       status: 400,
-      message: "'reservation_time' field: restaurant is not open until 10:30AM",
+      message:
+        "invalid time: reservation time cannot be before restaurant opens",
     });
   }
 
@@ -98,7 +105,7 @@ function validateDate(request, response, next) {
   ) {
     return next({
       status: 400,
-      message: "'reservation_time' field: restaurant is closed after 10:30PM",
+      message: "invalid time: reservation time cannot be after 10:30PM",
     });
   }
 
@@ -109,7 +116,7 @@ function validateDate(request, response, next) {
     return next({
       status: 400,
       message:
-        "'reservation_time' field: reservation must be made at least an hour before closing (10:30PM)",
+        "invalid time: can only make reservation time at least one hour before restaurant closes",
     });
   }
 
@@ -117,16 +124,15 @@ function validateDate(request, response, next) {
 }
 
 /**
- * function for handling /POST requests to /reservations
+ * function for handling /POST reqs to /reservations
  * if all conditions are met
  */
-async function create(request, response) {
-  request.body.data.status = "booked";
-  const response = await service.create(request.body.data);
-  /** returns a status of 201 to indicate that the request was successful */
-  response.status(201).json({
-    /** returns [0] because the new reservation will be the
-     * first in the reservations list */
+async function create(req, res) {
+  /** sets default reservation status to `booked` */
+  req.body.data.status = "booked";
+  const response = await service.create(req.body.data);
+  /** using response[0] so only the newly created reservation object is displayed */
+  res.status(201).json({
     data: response[0],
   });
 }
@@ -135,5 +141,10 @@ async function create(request, response) {
  * and asyncErrorBoundary included */
 module.exports = {
   list: asyncErrorBoundary(list),
-  create: [validateBody, validateDate, asyncErrorBoundary(create)],
+  create: [
+    asyncErrorBoundary(validateData),
+    asyncErrorBoundary(validateBody),
+    asyncErrorBoundary(validateDate),
+    asyncErrorBoundary(create),
+  ],
 };
