@@ -9,6 +9,7 @@ export default function ReservationRow({ reservation, loadDashboard }) {
    * handles if the user wants to cancel a reservation
    */
   function handleCancel() {
+    /** updates reservation status if user confirms */
     if (
       window.confirm(
         "Do you want to cancel this reservation? This cannot be undone."

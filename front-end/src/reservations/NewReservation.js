@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
-import { listReservations, createReservation } from "../utils/api";
+import {
+  createReservation,
+  editReservation,
+  listReservations,
+} from "../utils/api";
 
 export default function NewReservation({ loadDashboard, edit }) {
+  /** clicking the "submit" button will save the reservation,
+   * then displays the previous page */
   const history = useHistory();
   const { reservation_id } = useParams();
 
   const [reservationsError, setReservationsError] = useState(null);
   const [errors, setErrors] = useState([]);
+  const [apiError, setApiError] = useState(null);
   const [formData, setFormData] = useState({
     // initial (default) data
     first_name: "",
@@ -78,19 +85,34 @@ export default function NewReservation({ loadDashboard, edit }) {
         target.name === "people" ? Number(target.value) : target.value,
     });
   }
- 
+
   /**
-   * Whenever a user submits the form, validate and make the API call.
+   * makes an api call if a reservation was created or edited and submitted
    */
   function handleSubmit(event) {
     event.preventDefault();
     const abortController = new AbortController();
-
     const foundErrors = [];
-    console.log(edit);
 
+    /** handle submit for edited reservation using  */
+    if (validateDate(foundErrors) && validateFields(foundErrors)) {
+      if (edit) {
+        editReservation(reservation_id, formData, abortController.signal)
+          .then(loadDashboard)
+          .then(() =>
+            history.push(`/dashboard?date=${formData.reservation_date}`)
+          )
+          .catch(setApiError);
+      } else {
+        createReservation(formData, abortController.signal)
+          .then(loadDashboard)
+          .then(() =>
+            history.push(`/dashboard?date=${formData.reservation_date}`)
+          )
+          .catch(setApiError);
+      }
+    }
     setErrors(foundErrors);
-
     return () => abortController.abort();
   }
 
@@ -166,6 +188,7 @@ export default function NewReservation({ loadDashboard, edit }) {
   return (
     <form>
       {errorsJSX()}
+      <ErrorAlert error={apiError} />
       <ErrorAlert error={reservationsError} />
 
       <label className="form-label" htmlFor="first_name">

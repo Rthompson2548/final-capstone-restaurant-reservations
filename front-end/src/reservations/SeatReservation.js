@@ -19,9 +19,7 @@ export default function SeatReservation({ tables, loadDashboard }) {
 	 */
 	useEffect(() => {
     	const abortController = new AbortController();
-
     	setReservationsError(null);
-
     	listReservations(null, abortController.signal)
       		.then(setReservations)
       		.catch(setReservationsError);

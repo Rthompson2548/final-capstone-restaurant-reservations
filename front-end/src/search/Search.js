@@ -1,113 +1,104 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
-import { createTable } from "../utils/api";
+import { listReservations } from "../utils/api";
+import ReservationRow from "../dashboard/ReservationRow";
 
 /**
- * A page that allows the user to create a new table.
+ * Search component allows the user to search for a specific reservation
+ * by entering in a phone number into the search field and display all 
+ * reservation(s) under the give phone number
  */
-export default function NewTable({ loadDashboard }) {
-  const history = useHistory();
-
+export default function Search() {
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [reservations, setReservations] = useState([]);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    // initial (default) data
-    table_name: "",
-    capacity: "",
-  });
 
   /**
-   * Whenever a user makes a change to the form, update the state.
+   * updates the state of mobileNumber when the user makes any changes to it
    */
   function handleChange({ target }) {
-    setFormData({
-      ...formData,
-      [target.name]:
-        target.name === "capacity" ? Number(target.value) : target.value,
-    });
+    setMobileNumber(target.value);
   }
 
   /**
-   * Whenever a user submits the form, validate and make the API call.
+   * makes a get request to list all reservations under the
+   * given mobileNumber when the "submit" button is clicked
    */
   function handleSubmit(event) {
     event.preventDefault();
 
     const abortController = new AbortController();
 
-    if (validateFields()) {
-      createTable(formData, abortController.signal)
-        .then(loadDashboard)
-        .then(() => history.push(`/dashboard`))
-        .catch(setError);
-    }
+    setError(null);
+
+    listReservations({ mobile_number: mobileNumber }, abortController.signal)
+      .then(setReservations)
+      .catch(setError);
 
     return () => abortController.abort();
   }
 
-  /**
-   * Makes sure all fields are filled and are filled correctly.
-   */
-  function validateFields() {
-    let foundError = null;
-
-    if (formData.table_name === "" || formData.capacity === "") {
-      foundError = { message: "Please fill out all fields." };
-    } else if (formData.table_name.length < 2) {
-      foundError = { message: "Table name must be at least 2 characters." };
+  const searchResultsJSX = () => {
+    if (reservations && reservations.length > 0) {
+      reservations.map((reservation) => (
+        <ReservationRow
+          key={reservation.reservation_id}
+          reservation={reservation}
+        />
+      ));
+    } else {
+      <tr>
+        <td>No reservations found</td>
+      </tr>;
     }
-
-    setError(foundError);
-
-    return foundError === null;
-  }
+  };
 
   return (
-    <form>
-      <ErrorAlert error={error} />
+    <div>
+      <form>
+        <ErrorAlert error={error} />
 
-      <label className="form-label" htmlFor="table_name">
-        Table Name:&nbsp;
-      </label>
-      <input
-        className="form-control"
-        name="table_name"
-        id="table_name"
-        type="text"
-        minLength={2}
-        onChange={handleChange}
-        value={formData.table_name}
-        required
-      />
+        <label className="form-label" htmlFor="mobile_number">
+          Enter a customer's phone number:
+        </label>
+        <input
+          className="form-control"
+          name="mobile_number"
+          id="mobile_number"
+          type="tel"
+          onChange={handleChange}
+          value={mobileNumber}
+          required
+        />
 
-      <label className="form-label" htmlFor="capacity">
-        Capacity:&nbsp;
-      </label>
-      <input
-        className="form-control"
-        name="capacity"
-        id="capacity"
-        type="number"
-        min={1}
-        onChange={handleChange}
-        value={formData.capacity}
-        required
-      />
+        <button
+          className="btn btn-primary m-1"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          Find
+        </button>
+      </form>
 
-      <button
-        className="btn btn-primary m-1"
-        type="submit"
-        onClick={handleSubmit}
-      >
-        Submit
-      </button>
-      <button
-        className="btn btn-danger m-1"
-        type="button"
-        onClick={history.goBack}
-      >
-        Cancel
-      </button>
-    </form>
+      <table className="table table-hover m-1">
+        <thead className="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">People</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Cancel</th>
+            <th scope="col">Seat</th>
+          </tr>
+        </thead>
+
+        <tbody>{searchResultsJSX()}</tbody>
+      </table>
+    </div>
   );
 }
