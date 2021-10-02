@@ -28,18 +28,22 @@ function Dashboard({
         />
       ));
     } else {
-		return <div>No reservations found</div>
-	}
+      return <div>No reservations found</div>;
+    }
   };
 
   const tablesJSX = () => {
-    return tables.map((table) => (
-      <TableRow
-        key={table.table_id}
-        table={table}
-        loadDashboard={loadDashboard}
-      />
-    ));
+    if (tables && table.length > 0) {
+      return tables.map((table) => (
+        <TableRow
+          key={table.table_id}
+          table={table}
+          loadDashboard={loadDashboard}
+        />
+      ));
+    } else {
+      return <div>No reservations found</div>;
+    }
   };
 
   /**
