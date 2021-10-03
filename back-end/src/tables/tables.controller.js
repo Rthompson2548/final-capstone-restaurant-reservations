@@ -10,14 +10,14 @@ function validateBody(request, response, next) {
   if (!request.body.data.table_name || !request.body.data.table_name === "") {
     return next({
       status: 400,
-      message: "400 error: table name field is missing",
+      message: "invalid table name: table name must be included",
     });
   }
 
   if (!request.body.capacity || request.body.data.capacity === "") {
     return next({
       status: 400,
-      message: "400 error: 1 or more of your fields were left blank",
+      message: "invalid table capacity: table capacity must be included",
     });
   }
 
