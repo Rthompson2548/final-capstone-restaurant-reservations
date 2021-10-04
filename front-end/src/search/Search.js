@@ -5,7 +5,7 @@ import ReservationRow from "../dashboard/ReservationRow";
 
 /**
  * Search component allows the user to search for a specific reservation
- * by entering in a phone number into the search field and display all 
+ * by entering in a phone number into the search field and display all
  * reservation(s) under the give phone number
  */
 export default function Search() {
@@ -39,18 +39,18 @@ export default function Search() {
   }
 
   const searchResultsJSX = () => {
-    if (reservations && reservations.length > 0) {
+    return reservations.length > 0 ? (
       reservations.map((reservation) => (
         <ReservationRow
           key={reservation.reservation_id}
           reservation={reservation}
         />
-      ));
-    } else {
+      ))
+    ) : (
       <tr>
         <td>No reservations found</td>
-      </tr>;
-    }
+      </tr>
+    );
   };
 
   return (
@@ -67,7 +67,7 @@ export default function Search() {
           id="mobile_number"
           type="tel"
           onChange={handleChange}
-          value={mobileNumber}
+          value={FormData.mobile_number}
           required
         />
 

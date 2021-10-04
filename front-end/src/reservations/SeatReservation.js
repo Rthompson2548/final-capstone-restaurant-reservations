@@ -54,7 +54,6 @@ export default function SeatReservation({ tables, loadDashboard }) {
   }
 
   /**
-   * Make sure the reservation can be seated at a particular table.
    */
   function validateSeat() {
     const foundErrors = [];

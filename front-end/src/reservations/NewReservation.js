@@ -142,8 +142,7 @@ export default function NewReservation({ loadDashboard, edit }) {
 
     if (reservationDateTime.getDay() === 2) {
       foundErrors.push({
-        message:
-          "invalid date: restaurant is closed on tuesdays.",
+        message: "invalid date: restaurant is closed on tuesdays.",
       });
     }
 
@@ -155,23 +154,24 @@ export default function NewReservation({ loadDashboard, edit }) {
 
     if (
       reservationDateTime.getHours() < 10 ||
-      (reservationDateTime.getHours() === 10 && reservationDateTime.getMinutes() < 30)
+      (reservationDateTime.getHours() === 10 &&
+        reservationDateTime.getMinutes() < 30)
     ) {
       foundErrors.push({
-        message:
-          "invalid time: restaurant does not open until 10:30am",
+        message: "invalid time: restaurant does not open until 10:30am",
       });
     } else if (
       reservationDateTime.getHours() > 22 ||
-      (reservationDateTime.getHours() === 22 && reservationDateTime.getMinutes() >= 30)
+      (reservationDateTime.getHours() === 22 &&
+        reservationDateTime.getMinutes() >= 30)
     ) {
       foundErrors.push({
-        message:
-          "invalid time: restaurant closes at 10:30pm",
+        message: "invalid time: restaurant closes at 10:30pm",
       });
     } else if (
       reservationDateTime.getHours() > 21 ||
-      (reservationDateTime.getHours() === 21 && reservationDateTime.getMinutes() > 30)
+      (reservationDateTime.getHours() === 21 &&
+        reservationDateTime.getMinutes() > 30)
     ) {
       foundErrors.push({
         message:
@@ -219,9 +219,9 @@ export default function NewReservation({ loadDashboard, edit }) {
         Mobile Number:&nbsp;
       </label>
       <input
+        className="form-control"
         name="mobile_number"
         id="mobile_number"
-        className="form-control"
         type="text"
         onChange={handleChange}
         value={formData.mobile_number}
@@ -246,7 +246,7 @@ export default function NewReservation({ loadDashboard, edit }) {
       <label className="form-label" htmlFor="reservation_time">
         Reservation Time:&nbsp;
       </label>
-      <input 
+      <input
         name="reservation_time"
         id="reservation_time"
         className="form-control"
