@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
+import { createTable } from "../utils/api";
 
-export default function NewTable() {
+export default function NewTable({ loadDashboard }) {
   const history = useHistory();
 
   const [error, setError] = useState([]);
@@ -14,16 +15,27 @@ export default function NewTable() {
 
   // sets table info when entered
   function handleChange({ target }) {
-    setFormData({ ...formData, [target.name]: target.value });
+    setFormData({
+      ...formData,
+      [target.name]:
+        target.name === "capacity" ? Number(target.value) : target.value,
+    });
   }
 
   // saves table info and redirects to dashboard when form is submitted
   function handleSubmit(event) {
     event.preventDefault();
 
+    const abortController = new AbortController();
+
     if (validateFields()) {
-      history.push(`/dashboard`);
+      createTable(formData, abortController.signal)
+        .then(loadDashboard)
+        .then(() => history.push(`/dashboard`))
+        .catch(setError);
     }
+
+    return () => abortController.abort();
   }
 
   // checks for table's capacity and length of table's name
@@ -44,7 +56,7 @@ export default function NewTable() {
 
     setError(foundError);
 
-    return foundError.length !== null;
+    return foundError === null;
   }
 
   return (

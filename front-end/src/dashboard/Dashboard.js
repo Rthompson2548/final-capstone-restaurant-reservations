@@ -18,34 +18,48 @@ function Dashboard({
 }) {
   const history = useHistory();
 
+  // const reservationsJSX = () => {
+  //   if (reservations && reservations.length > 0) {
+  //     return reservations.map((reservation) => (
+  //       <ReservationRow
+  //         key={reservation.reservation_id}
+  //         reservation={reservation}
+  //         loadDashboard={loadDashboard}
+  //       />
+  //     ));
+  //   } else {
+  //     return <div>No reservations found</div>;
+  //   }
+  // };
+
+  // const tablesJSX = () => {
+  //   if (tables && table.length > 0) {
+  //     return tables.map((table) => (
+  //       <TableRow
+  //         key={table.table_id}
+  //         table={table}
+  //         loadDashboard={loadDashboard}
+  //       />
+  //     ));
+  //   } else {
+  //     return <div>No reservations found</div>;
+  //   }
+  // };
+
   const reservationsJSX = () => {
-    if (reservations && reservations.length > 0) {
-      return reservations.map((reservation) => (
-        <ReservationRow
-          key={reservation.reservation_id}
-          reservation={reservation}
-          loadDashboard={loadDashboard}
-        />
-      ));
-    } else {
-      return <div>No reservations found</div>;
-    }
-  };
-
+		return reservations.map((reservation) => 
+			<ReservationRow key={reservation.reservation_id} reservation={reservation} loadDashboard={loadDashboard} />);
+	};
+ 
   const tablesJSX = () => {
-    if (tables && table.length > 0) {
-      return tables.map((table) => (
-        <TableRow
-          key={table.table_id}
-          table={table}
-          loadDashboard={loadDashboard}
-        />
-      ));
-    } else {
-      return <div>No reservations found</div>;
-    }
+    return tables.map((table) => (
+      <TableRow
+        key={table.table_id}
+        table={table}
+        loadDashboard={loadDashboard}
+      />
+    ));
   };
-
   function handleClick({ target }) {
     let newDate;
     let useDate;

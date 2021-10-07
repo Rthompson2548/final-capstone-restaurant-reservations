@@ -27,6 +27,8 @@ export default function ReservationRow({ reservation, loadDashboard }) {
     }
   } 
 
+ 
+
   return (
     <tr>
       <th scope="row">{reservation.reservation_id}</th>

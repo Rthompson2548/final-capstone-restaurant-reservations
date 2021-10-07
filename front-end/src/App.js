@@ -7,7 +7,13 @@ import Layout from "./layout/Layout";
  * @returns {JSX.Element}
  */
 function App() {
-  return <Layout />;
+  return (
+    <Switch>
+      <Route path="/">
+        <Layout />
+      </Route>
+    </Switch>
+  );
 }
 
 export default App;

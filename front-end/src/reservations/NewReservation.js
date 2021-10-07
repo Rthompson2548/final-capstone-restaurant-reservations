@@ -5,7 +5,7 @@ import {
   createReservation,
   editReservation,
   listReservations,
-} from "../utils/api";
+} from "../utils/api"; 
 
 export default function NewReservation({ loadDashboard, edit }) {
   const history = useHistory();
@@ -227,8 +227,7 @@ export default function NewReservation({ loadDashboard, edit }) {
         value={formData.mobile_number}
         required
       />
-      /** including `placeholder` and `pattern` attributes for `date` and `time`
-      to add support to non-chrome browsers */
+
       <label className="form-label" htmlFor="reservation_date">
         Reservation Date:&nbsp;
       </label>

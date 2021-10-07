@@ -1,5 +1,5 @@
+/** called whenever a migration is run */
 exports.up = function (knex) {
-  /** called whenever a migration is run */
   return knex.schema.createTable("reservations", (table) => {
     table.increments("reservation_id").primary().notNullable();
     table.string("first_name").notNullable();
