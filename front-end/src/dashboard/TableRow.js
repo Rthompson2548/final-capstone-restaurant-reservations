@@ -4,24 +4,21 @@ import { finishTable } from "../utils/api";
 export default function TableRow({ table, loadDashboard }) {
   if (!table) return null;
 
-  /**
-   * handles finishing a seated table 
-   */
+  /** handles finishing a seated table */
   function handleFinish() {
     if (
       window.confirm(
         "Is this table ready to seat new guests? This cannot be undone."
-      ) 
+      )
     ) {
       const abortController = new AbortController();
-
       finishTable(table.table_id, abortController.signal).then(loadDashboard);
-
       return () => abortController.abort();
     }
   }
 
-  return ( 
+  /** displays a list of all tables */
+  return (
     <tr>
       <th scope="row">{table.table_id}</th>
       <td>{table.table_name}</td>

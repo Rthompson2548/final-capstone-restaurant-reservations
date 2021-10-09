@@ -5,7 +5,7 @@ import {
   createReservation,
   editReservation,
   listReservations,
-} from "../utils/api"; 
+} from "../utils/api";
 
 export default function NewReservation({ loadDashboard, edit }) {
   const history = useHistory();
@@ -24,9 +24,7 @@ export default function NewReservation({ loadDashboard, edit }) {
     people: "",
   });
 
-  /**
-   * Make an API call to get all reservations if we are editing, filling in the form.
-   */
+  /** makes a get request to "reservations" if the user is editing or filling out the form.*/
   useEffect(() => {
     /** sets condition to make an api call to get  */
     if (edit) {
@@ -66,16 +64,14 @@ export default function NewReservation({ loadDashboard, edit }) {
     /** lists reservations for the given date once the new reservation has been created */
     async function loadReservations() {
       const abortController = new AbortController();
-      /** uses listReservations to send a get request to display all reservations for the given date */
+      /** uses listReservations() to send a get request to display all reservations for the given date */
       return await listReservations(null, abortController.signal).catch(
         setReservationsError
       );
     }
   }, [edit, reservation_id]);
 
-  /**
-   * Whenever a user makes a change to the form, update the state.
-   */
+  /** updates the state of the form when the user makes any changes to it */
   function handleChange({ target }) {
     setFormData({
       ...formData,
@@ -84,18 +80,16 @@ export default function NewReservation({ loadDashboard, edit }) {
     });
   }
 
-  /**
-   * if a reservation was created or edited, clicking the "submit" button will do the following:
-   * make an api call
-   * save the reservation
-   * display the previous page
-   */
+  /** if a reservation was created or edited, clicking the "submit" button will do the following:
+    * make an api call
+    * save the reservation
+    * display the previous page
+  */
   function handleSubmit(event) {
     event.preventDefault();
     const abortController = new AbortController();
     const foundErrors = [];
 
-    /** handle submit for edited reservation using  */
     if (validateDate(foundErrors) && validateFields(foundErrors)) {
       if (edit) {
         editReservation(reservation_id, formData, abortController.signal)
@@ -117,9 +111,7 @@ export default function NewReservation({ loadDashboard, edit }) {
     return () => abortController.abort();
   }
 
-  /**
-   * Make sure all fields exist and are filled in correctly.
-   */
+  /** checks if user has filled out each field in the form */ 
   function validateFields(foundErrors) {
     for (const field in formData) {
       if (formData[field] === "") {
@@ -131,15 +123,12 @@ export default function NewReservation({ loadDashboard, edit }) {
 
     return foundErrors.length === 0;
   }
-  /**
-   * Make sure the date and time of the reservation works with the restaurant's schedule.
-   */
+  /** checks that the user has entered a date & time that the restaurant is available */
   function validateDate(foundErrors) {
     const reservationDateTime = new Date(
       `${formData.reservation_date}T${formData.reservation_time}:00.000`
     );
     const todaysDate = new Date();
-
     if (reservationDateTime.getDay() === 2) {
       foundErrors.push({
         message: "invalid date: restaurant is closed on tuesdays.",
@@ -178,7 +167,6 @@ export default function NewReservation({ loadDashboard, edit }) {
           "invalid time: reservation must be made at least an hour before closing",
       });
     }
-
     return foundErrors.length === 0;
   }
 
@@ -186,6 +174,7 @@ export default function NewReservation({ loadDashboard, edit }) {
     return errors.map((error, idx) => <ErrorAlert key={idx} error={error} />);
   };
 
+  /** displays the reservation form to the user */
   return (
     <form>
       {errorsJSX()}

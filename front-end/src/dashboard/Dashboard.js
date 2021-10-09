@@ -2,8 +2,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { previous, next, today } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
-import ReservationRow from "./ReservationRow";
 import TableRow from "./TableRow";
+import ReservationRow from "./ReservationRow";
 
 /**
  * Defines the dashboard page.
@@ -18,39 +18,16 @@ function Dashboard({
 }) {
   const history = useHistory();
 
-  // const reservationsJSX = () => {
-  //   if (reservations && reservations.length > 0) {
-  //     return reservations.map((reservation) => (
-  //       <ReservationRow
-  //         key={reservation.reservation_id}
-  //         reservation={reservation}
-  //         loadDashboard={loadDashboard}
-  //       />
-  //     ));
-  //   } else {
-  //     return <div>No reservations found</div>;
-  //   }
-  // };
-
-  // const tablesJSX = () => {
-  //   if (tables && table.length > 0) {
-  //     return tables.map((table) => (
-  //       <TableRow
-  //         key={table.table_id}
-  //         table={table}
-  //         loadDashboard={loadDashboard}
-  //       />
-  //     ));
-  //   } else {
-  //     return <div>No reservations found</div>;
-  //   }
-  // };
-
   const reservationsJSX = () => {
-		return reservations.map((reservation) => 
-			<ReservationRow key={reservation.reservation_id} reservation={reservation} loadDashboard={loadDashboard} />);
-	};
- 
+    return reservations.map((reservation) => (
+      <ReservationRow
+        key={reservation.reservation_id}
+        reservation={reservation}
+        loadDashboard={loadDashboard}
+      />
+    ));
+  };
+
   const tablesJSX = () => {
     return tables.map((table) => (
       <TableRow
@@ -89,7 +66,6 @@ function Dashboard({
   return (
     <main>
       <h1>Dashboard</h1>
-
       <h4 className="mb-0">Reservations for {date}</h4>
 
       <button

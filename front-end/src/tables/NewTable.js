@@ -7,13 +7,13 @@ export default function NewTable({ loadDashboard }) {
   const history = useHistory();
 
   const [error, setError] = useState([]);
-  // sets initial state of a table
+  /** sets initial state of a table */
   const [formData, setFormData] = useState({
     table_name: "",
     capacity: 1,
   });
 
-  // sets table info when entered
+  /* sets table info when entered */
   function handleChange({ target }) {
     setFormData({
       ...formData,
@@ -22,10 +22,9 @@ export default function NewTable({ loadDashboard }) {
     });
   }
 
-  // saves table info and redirects to dashboard when form is submitted
+  /* saves table info and redirects to dashboard when form is submitted */
   function handleSubmit(event) {
     event.preventDefault();
-
     const abortController = new AbortController();
 
     if (validateFields()) {
@@ -38,7 +37,7 @@ export default function NewTable({ loadDashboard }) {
     return () => abortController.abort();
   }
 
-  // checks for table's capacity and length of table's name
+  /* checks for table's capacity and length of table's name */
   function validateFields() {
     let foundError = null;
 
@@ -55,7 +54,6 @@ export default function NewTable({ loadDashboard }) {
     }
 
     setError(foundError);
-
     return foundError === null;
   }
 

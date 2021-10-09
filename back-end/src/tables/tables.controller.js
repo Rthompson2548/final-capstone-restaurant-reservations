@@ -160,9 +160,7 @@ async function validateTableId(request, response, next) {
   next();
 }
 
-/**
- * makes sure that a table status is set to occupied before seating the table
- */
+/** makes sure that a table status is set to occupied before seating the table */
 async function validateSeatedTable(request, response, next) {
   if (response.locals.table.status !== "occupied") {
     return next({ status: 400, message: "this table is not occupied" });
@@ -171,16 +169,13 @@ async function validateSeatedTable(request, response, next) {
   next();
 }
 
-/**
- * finishes a table.
- */
+/** finishes a table */
 async function destroy(request, response) {
   await service.updateReservation(
     response.locals.table.reservation_id,
     "finished"
   );
   await service.free(response.locals.table.table_id);
-
   response.status(200).json({ data: { status: "finished" } });
 }
 

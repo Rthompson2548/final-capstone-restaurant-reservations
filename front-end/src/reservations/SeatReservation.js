@@ -14,9 +14,7 @@ export default function SeatReservation({ tables, loadDashboard }) {
 
   const { reservation_id } = useParams();
 
-  /**
-   * At first render, make an API call to get all reservations.
-   */
+  /** makes a get request to list all reservations to the user */
   useEffect(() => {
     const abortController = new AbortController();
     setReservationsError(null);
@@ -29,15 +27,13 @@ export default function SeatReservation({ tables, loadDashboard }) {
 
   if (!tables || !reservations) return null;
 
-  /**
-   * Whenever a user makes a change to the form, update the state.
-   */
+  /** updates the state of the form upon any changes made by the user */
   function handleChange({ target }) {
     setTableId(target.value);
   }
 
   /**
-   * Whenever a user submits the form, validate and make the API call.
+   * makes a put request to update the form upon the user's submission
    */
   function handleSubmit(event) {
     event.preventDefault();
@@ -49,12 +45,10 @@ export default function SeatReservation({ tables, loadDashboard }) {
         .then(() => history.push(`/dashboard`))
         .catch(setApiError);
     }
-
     return () => abortController.abort();
   }
 
-  /**
-   */
+  /** checks that the seat can host the user's reservation */
   function validateSeat() {
     const foundErrors = [];
 
@@ -84,7 +78,6 @@ export default function SeatReservation({ tables, loadDashboard }) {
     }
 
     setErrors(foundErrors);
-
     return foundErrors.length === 0;
   }
 

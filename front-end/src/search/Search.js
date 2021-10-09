@@ -20,15 +20,10 @@ export default function Search() {
     setMobileNumber(target.value);
   }
 
-  /**
-   * makes a get request to list all reservations under the
-   * given mobileNumber when the "submit" button is clicked
-   */
+  /** makes a get request to list all reservations under the given mobileNumber when the "submit" button is clicked */
   function handleSubmit(event) {
     event.preventDefault();
-
     const abortController = new AbortController();
-
     setError(null);
 
     listReservations({ mobile_number: mobileNumber }, abortController.signal)
@@ -38,6 +33,7 @@ export default function Search() {
     return () => abortController.abort();
   }
 
+  /** returns all reservation(s), if any */
   const searchResultsJSX = () => {
     return reservations.length > 0 ? (
       reservations.map((reservation) => (

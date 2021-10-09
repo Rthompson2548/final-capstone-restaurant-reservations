@@ -92,21 +92,19 @@ export async function createTable(table, signal) {
   return await fetchJson(url, { headers, signal, method: "POST", body }, []);
 }
 
-/** returns a updated data to a given reservation's page */
+/** returns updated data to a given reservation's page */
 export async function editReservation(reservation_id, reservation, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   const body = JSON.stringify({ data: reservation });
   return await fetchJson(url, { headers, signal, method: "PUT", body }, []);
 }
 
-/** returns a updated data about the reservation's status to the given reservation's page */
+/** returns updated data about the reservation's status to the given reservation's page */
 export async function updateReservationStatus(reservation_id, status, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
   const body = JSON.stringify({ data: { status: status } });
   return await fetchJson(url, { headers, signal, method: "PUT", body }, []);
 }
-
-
 
 /** removes a table for the seat page */
 export async function finishTable(table_id, signal) {
@@ -114,6 +112,7 @@ export async function finishTable(table_id, signal) {
   return await fetchJson(url, { headers, signal, method: "DELETE" }, []);
 }
 
+/** updates the table status and displays it in the tables list */
 export async function seatTable(reservation_id, table_id, signal) {
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const body = JSON.stringify({ data: { reservation_id: reservation_id } });
