@@ -2,6 +2,7 @@ const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 /**
+ * 
  */
 async function list(req, res) {
 	const date = req.query.date;
