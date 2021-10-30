@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav className="nav navbar-nav">
+  <div>
+      <nav className="nav navbar-nav mt-3">
       <ul className="nav navbar-nav">
         <li className="nav-item">
           <button
@@ -97,6 +98,7 @@ function Menu() {
         />
       </div>
     </nav>
+  </div>
   );
 }
 

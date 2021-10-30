@@ -19,7 +19,7 @@ export default function TableRow({ table, loadDashboard }) {
 
   /** displays a list of all tables */
   return (
-    <tr>
+    <tr style={{fontFamily: "Space Grotesk"}}>
       <th scope="row">{table.table_id}</th>
       <td>{table.table_name}</td>
       <td>{table.capacity}</td>

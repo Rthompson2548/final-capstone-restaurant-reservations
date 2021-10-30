@@ -64,11 +64,16 @@ function Dashboard({
   }
 
   return (
-    <div className="w-50 ml-3">
+    <div
+      className="w-80 ml-2 pr-4 mr-4 pt-4"
+      style={{ fontFamily: "Space Grotesk" }}
+    >
       <main>
-        <h1 className="mt-4 font-weight-bold">{date}</h1>
+        <h1 className="font-weight-bold d-flex justify-content-center mt-4 mb-4 pb-4">
+          Dashboard
+        </h1>
 
-        <div className="mt-4 mb-4">
+        <div className="mt-4 mb-4 d-flex justify-content-center">
           <button
             className="btn-lg btn-light btn-outline-dark m-1"
             type="button"
@@ -94,13 +99,17 @@ function Dashboard({
             Next
           </button>
         </div>
+        <h4 className="mt-4 font-weight-bold d-flex justify-content-center mb-4">
+          DD / MM / YYYY
+        </h4>
+        {/* <h1 className="mt-4 font-weight-bold d-flex justify-content-center">{date}</h1> */}
 
-
+        <h4 className="mb-4 font-weight-bold">Reservations</h4>
         {/* <ErrorAlert error={reservationsError} /> */}
 
-        <table className="table table-hover m-1">
-          <thead className="thead-light">
-            <tr>
+        <table className="table text-nowrap table-hover mb-4 pb-4">
+          <thead className="thead-dark">
+            <tr className="text-center">
               <th scope="col">ID</th>
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
@@ -121,13 +130,13 @@ function Dashboard({
         <br />
         <br />
 
-        <h4 className="mb-0">Tables</h4>
+        <h4 className="mb-4 mt-4 pt-4 font-weight-bold">Tables</h4>
 
         {/* <ErrorAlert error={tablesError} /> */}
 
-        <table className="table table-hover m-1">
-          <thead className="thead-light">
-            <tr>
+        <table className="table table-hover m-1 text-nowrap">
+          <thead className="thead-dark">
+            <tr className="text-center">
               <th scope="col">Table ID</th>
               <th scope="col">Table Name</th>
               <th scope="col">Capacity</th>

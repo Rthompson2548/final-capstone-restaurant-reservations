@@ -44,41 +44,43 @@ export default function Search() {
       ))
     ) : (
       <tr>
-        <td>No reservations found</td>
+        {/* <td>No reservations found</td> */}
       </tr>
     );
   };
 
   return (
-    <div>
-      <form>
+    <div className="w-80 ml-2 pr-4 mr-4 pt-4">
+      <form className="">
         {/* <ErrorAlert error={error} /> */}
 
-        <label className="form-label" htmlFor="mobile_number">
+        {/* <label className="form-label font-weight-bold" htmlFor="mobile_number">
           Enter a customer's phone number:
-        </label>
-        <input
-          className="form-control"
-          name="mobile_number"
-          id="mobile_number"
-          type="tel"
-          onChange={handleChange}
-          value={FormData.mobile_number}
-          required
-        />
-
-        <button
-          className="btn btn-primary m-1"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Find
-        </button>
+        </label> */}
+        <div className="input-group w-50">
+          <input
+            className="form-control mr-2 border-dark rounded"
+            name="mobile_number"
+            id="mobile_number"
+            type="tel"
+            placeholder="Enter a customer's phone number"
+            onChange={handleChange}
+            value={FormData.mobile_number}
+            required
+          />
+          <button
+            className="btn-xs btn-outline-secondary btn-light rounded"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            <img src="https://img.icons8.com/material-outlined/40/000000/search--v1.png"/>
+          </button>
+        </div>
       </form>
 
-      <table className="table table-hover m-1">
-        <thead className="thead-light">
-          <tr>
+      <table className="table text-nowrap table-hover mt-4">
+        <thead className="thead-dark">
+          <tr className="text-center">
             <th scope="col">ID</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>

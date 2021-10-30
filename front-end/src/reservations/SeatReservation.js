@@ -94,7 +94,7 @@ export default function SeatReservation({ tables, loadDashboard }) {
   };
 
   return (
-    <form className="form-select">
+    <form className="form-select" style={{fontFamily: "Space Grotesk"}}>
       {errorsJSX()}
       {/* <ErrorAlert error={apiError} /> */}
       {/* <ErrorAlert error={reservationsError} /> */}

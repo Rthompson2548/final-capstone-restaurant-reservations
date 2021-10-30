@@ -58,37 +58,58 @@ export default function NewTable({ loadDashboard }) {
   }
 
   return (
-    <form>
-      {/* <ErrorAlert error={error} /> */}
+    <div style={{fontFamily: "Space Grotesk"}}>
+      <h2 className="font-weight-bold d-flex justify-content-center mt-4">
+        New Table
+      </h2>
+      <div className="d-flex justify-content-center mt-4">
+        <form className="font-weight-bold mt-2 w-75">
+          {/* <ErrorAlert error={error} /> */}
 
-      <label htmlFor="table_name">Table Name:&nbsp;</label>
-      <input
-        name="table_name"
-        id="table_name"
-        type="text"
-        minLength="2"
-        onChange={handleChange}
-        value={formData.table_name}
-        required
-      />
+          <label htmlFor="table_name">Table Name&nbsp;</label>
+          <input
+            name="table_name"
+            id="table_name"
+            className="form-control mb-3 border-dark"
+            type="text"
+            minLength="2"
+            onChange={handleChange}
+            value={formData.table_name}
+            required
+          />
 
-      <label htmlFor="capacity">Capacity:&nbsp;</label>
-      <input
-        name="capacity"
-        id="capacity"
-        type="number"
-        min="1"
-        onChange={handleChange}
-        value={formData.capacity}
-        required
-      />
+          <label htmlFor="capacity">Capacity&nbsp;</label>
+          <input
+            name="capacity"
+            id="capacity"
+            className="form-control mb-3 border-dark"
+            type="number"
+            min="1"
+            onChange={handleChange}
+            value={formData.capacity}
+            required
+            style={{color: "white"}}
+          />
 
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-      <button type="button" onClick={history.goBack}>
-        Cancel
-      </button>
-    </form>
+  <div className="d-flex justify-content-center mt-4">
+  <button
+            type="submit"
+            onClick={handleSubmit}
+            className="btn btn-dark border-dark m-1"
+            style={{ color: "white" }}
+          >
+            Submit
+          </button>
+          <button
+            className="btn btn-danger m-1"
+            type="button"
+            onClick={history.goBack}
+          >
+            Cancel
+          </button>
+  </div>
+        </form>
+      </div>
+    </div>
   );
 }
