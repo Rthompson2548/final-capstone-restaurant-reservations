@@ -8,50 +8,93 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav className="navbar navbar-dark align-items-start p-0">
-      <div className="container-fluid d-flex flex-column p-0">
-        <Link
-          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-          to="/"
-        >
-          <div className="sidebar-brand-text mx-3">
-            <span>Periodic Tables</span>
-          </div>
-        </Link>
-        <hr className="sidebar-divider my-0" />
-        <ul className="nav navbar-nav text-light" id="accordionSidebar">
-          <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
-              <span className="oi oi-dashboard" />
-              &nbsp;Dashboard
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/search">
-              <span className="oi oi-magnifying-glass" />
-              &nbsp;Search
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/reservations/new">
-              <span className="oi oi-plus" />
-              &nbsp;New Reservation
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/tables/new">
-              <span className="oi oi-layers" />
-              &nbsp;New Table
-            </Link>
-          </li>
-        </ul>
-        <div className="text-center d-none d-md-inline">
+    <nav>
+      <ul className="nav navbar-nav" id="accordionSidebar">
+        <li className="nav-item">
           <button
-            className="btn rounded-circle border-0"
-            id="sidebarToggle"
             type="button"
-          />
-        </div>
+            className="btn"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Home"
+          >
+            <Link className="nav-link m-3" to="/">
+              <img
+                style={{ color: "black" }}
+                src="https://img.icons8.com/material-rounded/60/000000/home.png"
+              />
+              {/* <p style={{ color: "black" }}>Home</p> */}
+            </Link>
+          </button>
+        </li>
+
+        <li className="nav-item">
+          <button
+            type="button"
+            className="btn"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Dashboard"
+          >
+            <Link className="nav-link m-3" to="/dashboard">
+              <img src="https://img.icons8.com/material/60/000000/dashboard-layout.png" />{" "}
+              {/* <p style={{ color: "black" }}>Dashboard</p> */}
+            </Link>
+          </button>
+        </li>
+
+        <li className="nav-item">
+          <button
+            type="button"
+            className="btn"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Search"
+          >
+            <Link className="nav-link m-3" to="/search">
+              <img src="https://img.icons8.com/material-outlined/60/000000/search--v1.png" />
+              {/* <p style={{ color: "black" }}> Search</p> */}
+            </Link>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            type="button"
+            className="btn"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="New Reservation"
+          >
+            <Link className="nav-link m-3" to="/reservations/new">
+              <img
+                className=""
+                src="https://img.icons8.com/ios-filled/60/000000/reservation.png"
+              />
+              {/* <p style={{ color: "black" }}> New Reservation</p> */}
+            </Link>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            type="button"
+            className="btn"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="New Table"
+          >
+            <Link className="nav-link m-3" to="/tables/new">
+              <img src="https://img.icons8.com/material-outlined/60/000000/table.png" />
+              {/* <p style={{ color: "black" }}>New Table</p> */}
+            </Link>
+          </button>
+        </li>
+      </ul>
+      <div className="text-center d-none d-md-inline">
+        <button
+          className="btn rounded-circle border-0"
+          id="sidebarToggle"
+          type="button"
+        />
       </div>
     </nav>
   );
