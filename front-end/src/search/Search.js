@@ -52,7 +52,7 @@ export default function Search() {
   return (
     <div>
       <form>
-        <ErrorAlert error={error} />
+        {/* <ErrorAlert error={error} /> */}
 
         <label className="form-label" htmlFor="mobile_number">
           Enter a customer's phone number:

@@ -59,7 +59,7 @@ export default function NewTable({ loadDashboard }) {
 
   return (
     <form>
-      <ErrorAlert error={error} />
+      {/* <ErrorAlert error={error} /> */}
 
       <label htmlFor="table_name">Table Name:&nbsp;</label>
       <input

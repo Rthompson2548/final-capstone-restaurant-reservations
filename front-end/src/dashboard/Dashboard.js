@@ -64,79 +64,83 @@ function Dashboard({
   }
 
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <h4 className="mb-0">Reservations for {date}</h4>
+    <div className="w-50 ml-3">
+      <main>
+        <h1 className="mt-4 font-weight-bold">{date}</h1>
 
-      <button
-        className="btn btn-secondary m-1"
-        type="button"
-        name="previous"
-        onClick={handleClick}
-      >
-        Previous
-      </button>
-      <button
-        className="btn btn-primary m-1"
-        type="button"
-        name="today"
-        onClick={handleClick}
-      >
-        Today
-      </button>
-      <button
-        className="btn btn-secondary m-1"
-        type="button"
-        name="next"
-        onClick={handleClick}
-      >
-        Next
-      </button>
+        <div className="mt-4 mb-4">
+          <button
+            className="btn-lg btn-light btn-outline-dark m-1"
+            type="button"
+            name="previous"
+            onClick={handleClick}
+          >
+            Previous
+          </button>
+          <button
+            className="btn-lg btn-dark btn-outline-dark m-1 text-white"
+            type="button"
+            name="today"
+            onClick={handleClick}
+          >
+            Today
+          </button>
+          <button
+            className="btn-lg btn-light btn-outline-dark m-1"
+            type="button"
+            name="next"
+            onClick={handleClick}
+          >
+            Next
+          </button>
+        </div>
 
-      <ErrorAlert error={reservationsError} />
 
-      <table className="table table-hover m-1">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Mobile Number</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">People</th>
-            <th scope="col">Status</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Cancel</th>
-            <th scope="col">Seat</th>
-          </tr>
-        </thead>
+        {/* <ErrorAlert error={reservationsError} /> */}
 
-        <tbody>{reservationsJSX()}</tbody>
-      </table>
+        <table className="table table-hover m-1">
+          <thead className="thead-light">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Mobile Number</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">People</th>
+              <th scope="col">Status</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Cancel</th>
+              <th scope="col">Seat</th>
+            </tr>
+          </thead>
 
-      <br />
-      <br />
+          <tbody>{reservationsJSX()}</tbody>
+        </table>
 
-      <h4 className="mb-0">Tables</h4>
+        <br />
+        <br />
 
-      <ErrorAlert error={tablesError} />
+        <h4 className="mb-0">Tables</h4>
 
-      <table className="table table-hover m-1">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">Table ID</th>
-            <th scope="col">Table Name</th>
-            <th scope="col">Capacity</th>
-            <th scope="col">Status</th>
-            <th scope="col">Reservation ID</th>
-            <th scope="col">Finish</th>
-          </tr>
-        </thead>
+        {/* <ErrorAlert error={tablesError} /> */}
 
-        <tbody>{tablesJSX()}</tbody>
-      </table>
-    </main>
+        <table className="table table-hover m-1">
+          <thead className="thead-light">
+            <tr>
+              <th scope="col">Table ID</th>
+              <th scope="col">Table Name</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Status</th>
+              <th scope="col">Reservation ID</th>
+              <th scope="col">Finish</th>
+            </tr>
+          </thead>
+
+          <tbody>{tablesJSX()}</tbody>
+        </table>
+      </main>
+    </div>
   );
 }
 

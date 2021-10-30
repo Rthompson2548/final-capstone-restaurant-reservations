@@ -178,8 +178,8 @@ export default function NewReservation({ loadDashboard, edit }) {
   return (
     <form>
       {errorsJSX()}
-      <ErrorAlert error={apiError} />
-      <ErrorAlert error={reservationsError} />
+      {/* <ErrorAlert error={apiError} /> */}
+      {/* <ErrorAlert error={reservationsError} /> */}
       <label className="form-label" htmlFor="first_name">
         First Name:&nbsp;
       </label>

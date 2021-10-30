@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav>
-      <ul className="nav navbar-nav" id="accordionSidebar">
+    <nav className="nav navbar-nav">
+      <ul className="nav navbar-nav">
         <li className="nav-item">
           <button
             type="button"
@@ -18,10 +18,10 @@ function Menu() {
             data-placement="bottom"
             title="Home"
           >
-            <Link className="nav-link m-3" to="/">
+            <Link className="nav-link " to="/">
               <img
                 style={{ color: "black" }}
-                src="https://img.icons8.com/material-rounded/60/000000/home.png"
+                src="https://img.icons8.com/material-rounded/45/000000/home.png"
               />
               {/* <p style={{ color: "black" }}>Home</p> */}
             </Link>
@@ -36,8 +36,8 @@ function Menu() {
             data-placement="bottom"
             title="Dashboard"
           >
-            <Link className="nav-link m-3" to="/dashboard">
-              <img src="https://img.icons8.com/material/60/000000/dashboard-layout.png" />{" "}
+            <Link className="nav-link " to="/dashboard">
+              <img src="https://img.icons8.com/material/45/000000/dashboard-layout.png" />{" "}
               {/* <p style={{ color: "black" }}>Dashboard</p> */}
             </Link>
           </button>
@@ -51,8 +51,8 @@ function Menu() {
             data-placement="bottom"
             title="Search"
           >
-            <Link className="nav-link m-3" to="/search">
-              <img src="https://img.icons8.com/material-outlined/60/000000/search--v1.png" />
+            <Link className="nav-link " to="/search">
+              <img src="https://img.icons8.com/material-outlined/45/000000/search--v1.png" />
               {/* <p style={{ color: "black" }}> Search</p> */}
             </Link>
           </button>
@@ -65,10 +65,10 @@ function Menu() {
             data-placement="bottom"
             title="New Reservation"
           >
-            <Link className="nav-link m-3" to="/reservations/new">
+            <Link className="nav-link " to="/reservations/new">
               <img
                 className=""
-                src="https://img.icons8.com/ios-filled/60/000000/reservation.png"
+                src="https://img.icons8.com/ios-filled/45/000000/reservation.png"
               />
               {/* <p style={{ color: "black" }}> New Reservation</p> */}
             </Link>
@@ -82,8 +82,8 @@ function Menu() {
             data-placement="bottom"
             title="New Table"
           >
-            <Link className="nav-link m-3" to="/tables/new">
-              <img src="https://img.icons8.com/material-outlined/60/000000/table.png" />
+            <Link className="nav-link " to="/tables/new">
+              <img src="https://img.icons8.com/material-outlined/45/000000/table.png" />
               {/* <p style={{ color: "black" }}>New Table</p> */}
             </Link>
           </button>
