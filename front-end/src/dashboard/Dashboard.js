@@ -105,7 +105,7 @@ function Dashboard({
         {/* <h1 className="mt-4 font-weight-bold d-flex justify-content-center">{date}</h1> */}
 
         <h4 className="mb-4 font-weight-bold">Reservations</h4>
-        <ErrorAlert error={reservationsError} />
+        {/* <ErrorAlert error={reservationsError} /> */}
 
         <table className="table text-nowrap table-hover mb-4 pb-4">
           <thead className="thead-dark">
@@ -132,7 +132,7 @@ function Dashboard({
 
         <h4 className="mb-4 mt-4 pt-4 font-weight-bold">Tables</h4>
 
-        <ErrorAlert error={tablesError} />
+        {/* <ErrorAlert error={tablesError} /> */}
 
         <table className="table table-hover m-1 text-nowrap">
           <thead className="thead-dark">

@@ -181,8 +181,8 @@ export default function NewReservation({ loadDashboard, edit }) {
       <div className="d-flex justify-content-center">
       <form className="font-weight-bold mt-3 m-3 w-75">
         {errorsJSX()}
-        <ErrorAlert error={apiError} />
-        <ErrorAlert error={reservationsError} />
+        {/* <ErrorAlert error={apiError} /> */}
+        {/* <ErrorAlert error={reservationsError} /> */}
         <label className="form-label" htmlFor="first_name">
           First Name&nbsp;
         </label>

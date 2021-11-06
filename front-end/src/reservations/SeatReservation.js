@@ -96,8 +96,8 @@ export default function SeatReservation({ tables, loadDashboard }) {
   return (
     <form className="form-select" style={{fontFamily: "Space Grotesk"}}>
       {errorsJSX()}
-      <ErrorAlert error={apiError} />
-      <ErrorAlert error={reservationsError} />
+      {/* <ErrorAlert error={apiError} /> */}
+      {/* <ErrorAlert error={reservationsError} /> */}
 
       <label className="form-label" htmlFor="table_id">
         Choose table:
