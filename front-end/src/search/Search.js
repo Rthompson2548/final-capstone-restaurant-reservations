@@ -44,7 +44,7 @@ export default function Search() {
       ))
     ) : (
       <tr>
-        {/* <td>No reservations found</td> */}
+        <td>No reservations found</td>
       </tr>
     );
   };
@@ -52,7 +52,7 @@ export default function Search() {
   return (
     <div className="w-80 ml-2 pr-4 mr-4 pt-4">
       <form className="">
-        {/* <ErrorAlert error={error} /> */}
+        <ErrorAlert error={error} />
 
         {/* <label className="form-label font-weight-bold" htmlFor="mobile_number">
           Enter a customer's phone number:

@@ -64,7 +64,7 @@ export default function NewTable({ loadDashboard }) {
       </h2>
       <div className="d-flex justify-content-center mt-4">
         <form className="font-weight-bold mt-2 w-75">
-          {/* <ErrorAlert error={error} /> */}
+          <ErrorAlert error={error} />
 
           <label htmlFor="table_name">Table Name&nbsp;</label>
           <input
@@ -88,7 +88,7 @@ export default function NewTable({ loadDashboard }) {
             onChange={handleChange}
             value={formData.capacity}
             required
-            style={{color: "white"}}
+            style={{color: "black"}}
           />
 
   <div className="d-flex justify-content-center mt-4">
