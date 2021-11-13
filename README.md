@@ -146,7 +146,7 @@ The screenshots are saved in `front-end/.screenshots` and you can review them af
 
 You can use the screenshots to debug your code by rendering additional information on the screen.
 
-## Product Backlog
+## Product Backlog.
 
 The Product Manager has already created the user stories for _Periodic Tables_. Each of the user stories is listed below, and your Product Manager wants them to be implemented in the order in which they are listed. Another developer has already written the tests for each of the user stories so that you don't have to.
 
