@@ -66,12 +66,16 @@ function Dashboard({
   return (
     <div
       className="w-80 ml-2 pr-4 mr-4 pt-4"
-      style={{ fontFamily: "Space Grotesk" }}
+      style={{ fontFamily: "Rubik" }}
     >
-      <main>
-        <h1 className="font-weight-bold d-flex justify-content-center mt-4 mb-4 pb-4">
-          Dashboard
+
+<h1 className="font-weight-bold d-flex justify-content-center text-center text-wrap mt-4 mb-4 pb-4" style={{ fontSize: "75px" }}>
+          Restaurant Reservation App
         </h1>
+      <main>
+        <h2 className="font-weight-bold d-flex justify-content-center mt-4 mb-4 pb-4">
+          Dashboard
+        </h2>
 
         <div className="mt-4 mb-4 d-flex justify-content-center">
           <button
@@ -83,7 +87,7 @@ function Dashboard({
             Previous
           </button>
           <button
-            className="btn-lg btn-dark btn-outline-dark m-1 text-white"
+            className="btn-lg btn-success btn-outline-success m-1 text-white"
             type="button"
             name="today"
             onClick={handleClick}
@@ -103,10 +107,10 @@ function Dashboard({
         {date}
         </h4>
 
-        <h4 className="mb-4 font-weight-bold">Reservations</h4>
+        <h3 className="mb-4 font-weight-bold">Reservations</h3>
         <ErrorAlert error={reservationsError} />
 
-        <table className="table text-nowrap table-hover mb-4 pb-4">
+        <table className="table text-wrap text-center table-hover mb-4 pb-4 w-100">
           <thead className="thead-dark">
             <tr className="text-center">
               <th scope="col">ID</th>
@@ -129,11 +133,11 @@ function Dashboard({
         <br />
         <br />
 
-        <h4 className="mb-4 mt-4 pt-4 font-weight-bold">Tables</h4>
+        <h3 className="mb-4 mt-4 pt-4 font-weight-bold">Tables</h3>
 
         <ErrorAlert error={tablesError} />
 
-        <table className="table table-hover m-1 text-nowrap">
+        <table className="table table-hover m-1 text-nowrap mb-4">
           <thead className="thead-dark">
             <tr className="text-center">
               <th scope="col">Table ID</th>

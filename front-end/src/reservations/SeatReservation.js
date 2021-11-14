@@ -94,7 +94,7 @@ export default function SeatReservation({ tables, loadDashboard }) {
   };
 
   return (
-    <form className="form-select" style={{fontFamily: "Space Grotesk"}}>
+    <form className="form-select" style={{fontFamily: "Rubik"}}>
       {errorsJSX()}
       <ErrorAlert error={apiError} />
       <ErrorAlert error={reservationsError} />
@@ -114,7 +114,7 @@ export default function SeatReservation({ tables, loadDashboard }) {
       </select>
 
       <button
-        className="btn btn-primary m-1"
+        className="btn btn-success m-1"
         type="submit"
         onClick={handleSubmit}
       >

@@ -176,7 +176,7 @@ export default function NewReservation({ loadDashboard, edit }) {
 
   /** displays the reservation form to the user */
   return (
-   <div style={{fontFamily: "Space Grotesk"}}>
+   <div style={{fontFamily: "Rubik"}}>
      <h2 className="font-weight-bold d-flex justify-content-center mt-4">New Reservation</h2>
       <div className="d-flex justify-content-center">
       <form className="font-weight-bold mt-3 m-3 w-75">
@@ -263,8 +263,8 @@ export default function NewReservation({ loadDashboard, edit }) {
         />
         <div className="d-flex justify-content-center">
           <button
-            className="btn btn-dark border-dark m-1" 
-            style={{color: "white"}}
+            className="btn btn-outline-0 btn-success border-dark m-1" 
+            // style={{color: "white"}}
             type="submit"
             onClick={handleSubmit}
           >
@@ -283,3 +283,4 @@ export default function NewReservation({ loadDashboard, edit }) {
    </div>
   );
 }
+

@@ -9,9 +9,9 @@ import { Link } from "react-router-dom";
 function Menu() {
   return (
     <div>
-      <nav className="nav navbar-nav mt-3">
+      <nav className="nav navbar-nav mt-3 bg-white" style={{ position: "fixed", zIndex: "2" }}>
         <ul className="nav navbar-nav">
-          <li className="nav-item">
+          <li className="nav-item pl-1">
             <button
               type="button"
               className="btn"
@@ -28,21 +28,7 @@ function Menu() {
             </button>
           </li>
 
-          <li className="nav-item">
-            <button
-              type="button"
-              className="btn"
-              data-toggle="tooltip"
-              data-placement="bottom"
-              title="Dashboard"
-            >
-              <Link className="nav-link " to="/dashboard">
-                <img src="https://img.icons8.com/material/24/000000/dashboard-layout.png" />{" "}
-              </Link>
-            </button>
-          </li>
-
-          <li className="nav-item">
+          <li className="nav-item pl-1">
             <button
               type="button"
               className="btn"
@@ -55,7 +41,7 @@ function Menu() {
               </Link>
             </button>
           </li>
-          <li className="nav-item">
+          <li className="nav-item pl-1">
             <button
               type="button"
               className="btn"
@@ -71,7 +57,7 @@ function Menu() {
               </Link>
             </button>
           </li>
-          <li className="nav-item">
+          <li className="nav-item pl-1">
             <button
               type="button"
               className="btn"
