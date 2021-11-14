@@ -69,17 +69,17 @@ function Dashboard({
       style={{ fontFamily: "Rubik" }}
     >
 
-<h1 className="font-weight-bold d-flex justify-content-center text-center text-wrap mt-4 mb-4 pb-4" style={{ fontSize: "75px" }}>
+<h1 className="font-weight-bold d-flex justify-content-center text-center text-wrap mt-3" style={{ fontSize: "50px" }}>
           Restaurant Reservation App
         </h1>
       <main>
-        <h2 className="font-weight-bold d-flex justify-content-center mt-4 mb-4 pb-4">
+        <h2 className="font-weight-bold d-flex justify-content-center mt-5 mb-4">
           Dashboard
         </h2>
 
         <div className="mt-4 mb-4 d-flex justify-content-center">
           <button
-            className="btn-lg btn-light btn-outline-dark m-1"
+            className="btn-xs rounded btn-light btn-outline-dark m-1 p-1"
             type="button"
             name="previous"
             onClick={handleClick}
@@ -87,7 +87,7 @@ function Dashboard({
             Previous
           </button>
           <button
-            className="btn-lg btn-success btn-outline-success m-1 text-white"
+            className="btn-xs rounded btn-success btn-outline-success m-1 text-white"
             type="button"
             name="today"
             onClick={handleClick}
@@ -95,7 +95,7 @@ function Dashboard({
             Today
           </button>
           <button
-            className="btn-lg btn-light btn-outline-dark m-1"
+            className="btn-xs rounded btn-light btn-outline-dark m-1"
             type="button"
             name="next"
             onClick={handleClick}
@@ -103,14 +103,14 @@ function Dashboard({
             Next
           </button>
         </div>
-        <h4 className="mt-4 font-weight-bold d-flex justify-content-center mb-4">
+        <h4 className="mt-4 font-weight-bold d-flex justify-content-center mb-2">
         {date}
         </h4>
 
         <h3 className="mb-4 font-weight-bold">Reservations</h3>
         <ErrorAlert error={reservationsError} />
 
-        <table className="table text-wrap text-center table-hover mb-4 pb-4 w-100">
+        <table className="table text-wrap text-center table-hover">
           <thead className="thead-dark">
             <tr className="text-center">
               <th scope="col">ID</th>
@@ -133,7 +133,7 @@ function Dashboard({
         <br />
         <br />
 
-        <h3 className="mb-4 mt-4 pt-4 font-weight-bold">Tables</h3>
+        <h3 className="mb-4 font-weight-bold">Tables</h3>
 
         <ErrorAlert error={tablesError} />
 
