@@ -4,7 +4,6 @@ import { previous, next, today } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import TableRow from "./TableRow";
 import ReservationRow from "./ReservationRow";
-
 /**
  * Defines the dashboard page.
  */
@@ -66,20 +65,20 @@ function Dashboard({
   return (
     <div
       className="w-80 ml-2 pr-4 mr-4 pt-4"
-      style={{ fontFamily: "Rubik" }}
+      style={{ fontFamily: "'Ubuntu', sans-serif", height: "100vh" }}
     >
-
-<h1 className="font-weight-bold d-flex justify-content-center text-center text-wrap mt-3" style={{ fontSize: "50px" }}>
-          Restaurant Reservation App
-        </h1>
-      <main>
-        <h2 className="font-weight-bold d-flex justify-content-center mt-5 mb-4">
-          Dashboard
-        </h2>
+      <h1
+        className="d-flex justify-content-center text-center text-wrap mt-3"
+        style={{ fontSize: "50px" }}
+      >
+        Reservation System
+      </h1>
+      <main style={{ height: "100vh" }}>
+        <h2 className="d-flex justify-content-center mt-5 mb-4">Dashboard</h2>
 
         <div className="mt-4 mb-4 d-flex justify-content-center">
           <button
-            className="btn-xs rounded btn-light btn-outline-dark m-1 p-1"
+            className="btn-xs rounded-pill shadow-none border-style-none btn-white mx-3 px-2 text-black"
             type="button"
             name="previous"
             onClick={handleClick}
@@ -87,7 +86,7 @@ function Dashboard({
             Previous
           </button>
           <button
-            className="btn-xs rounded btn-success btn-outline-success m-1 text-white"
+            className="btn-xs rounded-pill shadow-none btn-success mx-3 px-3 text-white"
             type="button"
             name="today"
             onClick={handleClick}
@@ -95,7 +94,7 @@ function Dashboard({
             Today
           </button>
           <button
-            className="btn-xs rounded btn-light btn-outline-dark m-1"
+            className="btn-xs rounded-pill shadow-none border-style-none btn-white mx-3 px-3 text-black"
             type="button"
             name="next"
             onClick={handleClick}
@@ -104,10 +103,11 @@ function Dashboard({
           </button>
         </div>
         <h4 className="mt-4 font-weight-bold d-flex justify-content-center mb-2">
-        {date}
+          {date}
         </h4>
 
-        <h3 className="mb-4 font-weight-bold">Reservations</h3>
+        <h4 className="mb-4 font-weight-bold">Reservations</h4>
+
         <ErrorAlert error={reservationsError} />
 
         <table className="table text-wrap text-center table-hover">
@@ -133,7 +133,7 @@ function Dashboard({
         <br />
         <br />
 
-        <h3 className="mb-4 font-weight-bold">Tables</h3>
+        <h4 className="mb-4 font-weight-bold">Tables</h4>
 
         <ErrorAlert error={tablesError} />
 

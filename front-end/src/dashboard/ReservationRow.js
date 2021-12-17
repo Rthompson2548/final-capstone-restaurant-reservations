@@ -27,7 +27,7 @@ export default function ReservationRow({ reservation, loadDashboard }) {
 
   /** displays a list of reservations for the given day */
   return (
-    <tr style={{fontFamily: "Rubik"}}>
+    <tr style={{fontFamily: "'Ubuntu', sans-serif"}}>
       <th scope="row">{reservation.reservation_id}</th>
       <td class="text-center">{reservation.first_name}</td>
       <td class="text-center">{reservation.last_name}</td>

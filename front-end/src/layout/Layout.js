@@ -9,7 +9,15 @@ import Menu from "./Menu";
  */
 function Layout() {
   return (
-    <div className="container-fluid" style={{ fontFamily: "Rubik" }}>
+    <div
+      className="container-fluid"
+      style={{
+        fontFamily: "'Ubuntu', sans-serif",
+        backgroundColor: "#FFB93A",
+        color: "#ffffff",
+        height: "100vh"
+      }}
+    >
       <div className="row">
         <div className="col-1 p-0">
           <Menu />

@@ -58,7 +58,7 @@ export default function NewTable({ loadDashboard }) {
   }
 
   return (
-    <div style={{fontFamily: "Rubik"}}>
+    <div style={{ fontFamily: "'Ubuntu', sans-serif", height: "100vh" }}>
       <h2 className="font-weight-bold d-flex justify-content-center mt-4">
         New Table
       </h2>
@@ -88,26 +88,26 @@ export default function NewTable({ loadDashboard }) {
             onChange={handleChange}
             value={formData.capacity}
             required
-            style={{color: "black"}}
+            style={{ color: "black" }}
           />
 
-  <div className="d-flex justify-content-center mt-4">
-  <button
-            type="submit"
-            onClick={handleSubmit}
-            className="btn btn-dark border-dark m-1"
-            style={{ color: "white" }}
-          >
-            Submit
-          </button>
-          <button
-            className="btn btn-danger m-1"
-            type="button"
-            onClick={history.goBack}
-          >
-            Cancel
-          </button>
-  </div>
+          <div className="d-flex justify-content-center mt-4">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-success border-none m-1"
+              style={{ color: "white" }}
+            >
+              Submit
+            </button>
+            <button
+              className="btn btn-danger m-1"
+              type="button"
+              onClick={history.goBack}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>
